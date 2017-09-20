@@ -1,0 +1,23 @@
+{
+  "name": "nsstr",
+  "main": "nsstr",
+  "version": "0.0.1",
+  "description": "parse and stringify nsstr",
+  "author": "Chris <chris@bumblehead.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iambumblehead/nsstr.git"
+  },
+  "keywords": [
+    "nsstr"
+  ],
+  "devDependencies": {
+    "jasmine": "2.5.3",
+    "jasmine-spec-reporter": "3.2.0"
+  },
+  "scripts": {
+    "test": "node node_modules/jasmine/bin/jasmine.js --verbose"
+  }
+}
