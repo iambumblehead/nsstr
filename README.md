@@ -4,6 +4,9 @@ nsstr
 
 Parse and stringify an nsstr. This library is gani-specific --it is probably not useful to you.
 
+[0]: http://www.bumblehead.com                            "bumblehead"
+
+
 ``` javascript
 nsstr.parse('[/dataerrors].subj.childremoved')
 // { fullstr: '[/dataerrors].subj.childremoved',
