@@ -40,7 +40,7 @@ nsstr.parse('pkg.start');
 ```
 
 
-![scrounge](https://github.com/iambumblehead/scroungejs/raw/master/img/hand.png)
+![scrounge](https://github.com/iambumblehead/scroungejs/raw/main/img/hand.png)
 
 (The MIT License)
 
