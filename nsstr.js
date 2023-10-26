@@ -2,21 +2,26 @@
 // Timestamp: 2017.09.20-06:59:18 (last modified)
 // Author(s): bumblehead <chris@bumblehead.com>
 
-module.exports = (o => {
+const ispathstrre = /^\.?\.?\//
+const isfnstrre = /^\[[^\]]*\]\./
+const parsekeyre = /([^.]*)\.(.*)/
+const parsefnslnsre = /^(\[.*\]\.)?(.*)$/
+
+export default (o => {
   o = opts =>
     o.parse(opts);
 
   o.ispathstr = str =>
-    /^\.?\.?\//.test(str);
+    ispathstrre.test(str);
 
   o.isfnsstr = str =>
-    /^\[[^\]]*\]\./.test(str);
+    isfnstrre.test(str);
 
   o.parsekeyprop = str =>
-    (str && str.match(/([^.]*)\.(.*)/) || []).slice(1);
+    (str && str.match(parsekeyre) || []).slice(1);
 
   o.parsefnslns = str =>
-    (str && str.match(/^(\[.*\]\.)?(.*)$/) || []).slice(1);
+    (str && str.match(parsefnslnsre) || []).slice(1);
 
   o.parse = fullstr => {
     let [ fnsstr, nsstr ] = o.parsefnslns(fullstr),
