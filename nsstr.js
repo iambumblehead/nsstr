@@ -3,56 +3,44 @@
 // Author(s): bumblehead <chris@bumblehead.com>
 
 const ispathstrre = /^\.?\.?\//
-const isfnstrre = /^\[[^\]]*\]\./
 const parsekeyre = /([^.]*)\.(.*)/
 const parsefnslnsre = /^(\[.*\]\.)?(.*)$/
 
-export default (o => {
-  o = opts =>
-    o.parse(opts);
+export default fullstr => {
+  let parsedfnsstr = (fullstr && fullstr.match(parsefnslnsre) || []),
+      fnsstr = parsedfnsstr[1],
+      nsstr = parsedfnsstr[2],
+      parsednsstr = (nsstr && nsstr.match(parsekeyre) || []),
+      nskey = parsednsstr[1],
+      nsprop = parsednsstr[2],
+      fnskey,
+      fnsprop,
+      fnspath;
 
-  o.ispathstr = str =>
-    ispathstrre.test(str);
+  if (fnsstr) {
+    // [/dataerrors]. => /dataerrors
+    // [fkey.shapedata]. => fkey.shapedata
+    fnsstr = fnsstr.substr(1, fnsstr.length - 3);
 
-  o.isfnsstr = str =>
-    isfnstrre.test(str);
-
-  o.parsekeyprop = str =>
-    (str && str.match(parsekeyre) || []).slice(1);
-
-  o.parsefnslns = str =>
-    (str && str.match(parsefnslnsre) || []).slice(1);
-
-  o.parse = fullstr => {
-    let [ fnsstr, nsstr ] = o.parsefnslns(fullstr),
-        [ nskey, nsprop ] = o.parsekeyprop(nsstr),
-        fnskey,
-        fnsprop,
-        fnspath;
-
-    if (fnsstr) {
-      fnsstr = fnsstr.substr(1, fnsstr.length - 3);
-
-      if (o.ispathstr(fnsstr)) {
-        fnspath = fnsstr;
-      } else {
-        [ fnskey, fnsprop ] = o.parsekeyprop(fnsstr);
-      }
+    if (ispathstrre.test(fnsstr)) {
+      fnspath = fnsstr
+    } else {
+      parsednsstr = (fnsstr && fnsstr.match(parsekeyre) || []),
+      fnskey = parsednsstr[1]
+      fnsprop = parsednsstr[2]
     }
+  }
 
-    return {
-      fullstr, // original str, [fkey.articlekey].subj.type
+  return {
+    fullstr, // original str, [fkey.articlekey].subj.type
 
-      nsstr,   // local namespace, subj.type
-      nskey,   // local key, base|subj|fkey|pkg|init
-      nsprop,  // local prop, type
+    nsstr,   // local namespace, subj.type
+    nskey,   // local key, base|subj|fkey|pkg|init
+    nsprop,  // local prop, type
 
-      fnsstr,  // foreign namespace, 'fkey.articlekey' || '/dataerrors'
-      fnspath, // foreign path, '/dataerrors'
-      fnskey,  // foreign key, fkey
-      fnsprop  // foreign prop, articlekey
-    };
-  };
-
-  return o;
-})();
+    fnsstr,  // foreign namespace, 'fkey.articlekey' || '/dataerrors'
+    fnspath, // foreign path, '/dataerrors'
+    fnskey,  // foreign key, fkey
+    fnsprop  // foreign prop, articlekey
+  }
+}

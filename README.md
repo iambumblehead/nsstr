@@ -2,10 +2,7 @@ nsstr
 =====
 **(c)[Bumblehead][0]**
 
-Parse and stringify an nsstr. This library is gani-specific --it is probably not useful to you.
-
-[0]: http://www.bumblehead.com                            "bumblehead"
-
+Parse and stringify an `nsstr`. This library is gani-specific and probably not useful elsewhere.
 
 ``` javascript
 nsstr.parse('[/dataerrors].subj.childremoved')
@@ -39,6 +36,8 @@ nsstr.parse('pkg.start');
 //   fnsprop: undefined }
 ```
 
+
+[0]: http://bumblehead.com                            "bumblehead"
 
 ![scrounge](https://github.com/iambumblehead/scroungejs/raw/main/img/hand.png)
 
