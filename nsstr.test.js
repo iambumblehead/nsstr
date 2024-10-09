@@ -7,7 +7,7 @@ import assert from 'node:assert/strict'
 import nsstr from './nsstr.js';
 
 test("should parse '[/dataerrors].subj.childremoved'", () => {
-  const nsobj = nsstr.parse('[/dataerrors].subj.childremoved');
+  const nsobj = nsstr('[/dataerrors].subj.childremoved');
 
   assert.strictEqual( nsobj.fnspath, '/dataerrors' );
   assert.strictEqual( nsobj.fullstr, '[/dataerrors].subj.childremoved' );
@@ -20,7 +20,7 @@ test("should parse '[/dataerrors].subj.childremoved'", () => {
 });
 
 test("should parse '[fkey.shapedata].subj.geometry'", () => {
-  const nsobj = nsstr.parse('[fkey.shapedata].subj.geometry');
+  const nsobj = nsstr('[fkey.shapedata].subj.geometry');
   
   assert.strictEqual( nsobj.fnspath, undefined );
   assert.strictEqual( nsobj.fullstr, '[fkey.shapedata].subj.geometry' );
@@ -33,7 +33,7 @@ test("should parse '[fkey.shapedata].subj.geometry'", () => {
 });
 
 test("should parse 'pkg.start'", () => {
-  const nsobj = nsstr.parse('pkg.start');
+  const nsobj = nsstr('pkg.start');
 
   assert.strictEqual( nsobj.fnspath, undefined );
   assert.strictEqual( nsobj.fullstr, 'pkg.start' );
