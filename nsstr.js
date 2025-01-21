@@ -11,7 +11,7 @@ export default fullstr => {
       fnsstr = parsedfnsstr[1],
       nsstr = parsedfnsstr[2],
       parsednsstr = (nsstr && nsstr.match(parsekeyre) || []),
-      nskey = parsednsstr[1],
+      nskey = parsednsstr[1] || nsstr,
       nsprop = parsednsstr[2],
       fnskey,
       fnsprop,
