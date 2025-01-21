@@ -44,3 +44,30 @@ test("should parse 'pkg.start'", () => {
   assert.strictEqual( nsobj.fnskey, undefined );
   assert.strictEqual( nsobj.fnsprop, undefined );
 });
+
+test("should parse 'subj'", () => {
+  const nsobj = nsstr('subj');
+
+  assert.strictEqual( nsobj.fnspath, undefined );
+  assert.strictEqual( nsobj.fullstr, 'subj' );
+  assert.strictEqual( nsobj.nsstr, 'subj' );
+  assert.strictEqual( nsobj.nskey, 'subj' );
+  assert.strictEqual( nsobj.nsprop, undefined );
+  assert.strictEqual( nsobj.fnsstr, undefined );
+  assert.strictEqual( nsobj.fnskey, undefined );
+  assert.strictEqual( nsobj.fnsprop, undefined );  
+});
+
+
+test("should parse '[fkey.shapedata].subj'", () => {
+  const nsobj = nsstr('[fkey.shapedata].subj');
+  
+  assert.strictEqual( nsobj.fnspath, undefined );
+  assert.strictEqual( nsobj.fullstr, '[fkey.shapedata].subj' );
+  assert.strictEqual( nsobj.nsstr, 'subj' );
+  assert.strictEqual( nsobj.nskey, 'subj' );
+  assert.strictEqual( nsobj.nsprop, undefined );
+  assert.strictEqual( nsobj.fnsstr, 'fkey.shapedata' );
+  assert.strictEqual( nsobj.fnskey, 'fkey' );
+  assert.strictEqual( nsobj.fnsprop, 'shapedata' );
+});
