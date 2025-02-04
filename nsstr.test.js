@@ -4,70 +4,94 @@
 
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import nsstr from './nsstr.js';
+import nsstr from './nsstr.js'
 
 test("should parse '[/dataerrors].subj.childremoved'", () => {
-  const nsobj = nsstr('[/dataerrors].subj.childremoved');
+  const nsobj = nsstr('[/dataerrors].subj.childremoved')
 
-  assert.strictEqual( nsobj.fnspath, '/dataerrors' );
-  assert.strictEqual( nsobj.fullstr, '[/dataerrors].subj.childremoved' );
-  assert.strictEqual( nsobj.nsstr, 'subj.childremoved' );
-  assert.strictEqual( nsobj.nskey, 'subj' );
-  assert.strictEqual( nsobj.nsprop, 'childremoved' );
-  assert.strictEqual( nsobj.fnsstr, '/dataerrors' );
-  assert.strictEqual( nsobj.fnskey, undefined );
-  assert.strictEqual( nsobj.fnsprop, undefined );
-});
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[/dataerrors].subj.childremoved',
+    fnspath: '/dataerrors',
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,    
+    nsstr: 'subj.childremoved',
+    nskey: 'subj',
+    nsprop: 'childremoved'
+  })
+})
+
+test("should parse '[/dataerrors]'", () => {
+  const nsobj = nsstr('[/dataerrors]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[/dataerrors]',
+    fnspath: '/dataerrors',
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: null,
+    nskey: null,
+    nsprop: null,
+  })
+})
 
 test("should parse '[fkey.shapedata].subj.geometry'", () => {
-  const nsobj = nsstr('[fkey.shapedata].subj.geometry');
-  
-  assert.strictEqual( nsobj.fnspath, undefined );
-  assert.strictEqual( nsobj.fullstr, '[fkey.shapedata].subj.geometry' );
-  assert.strictEqual( nsobj.nsstr, 'subj.geometry' );
-  assert.strictEqual( nsobj.nskey, 'subj' );
-  assert.strictEqual( nsobj.nsprop, 'geometry' );
-  assert.strictEqual( nsobj.fnsstr, 'fkey.shapedata' );
-  assert.strictEqual( nsobj.fnskey, 'fkey' );
-  assert.strictEqual( nsobj.fnsprop, 'shapedata' );
-});
+  const nsobj = nsstr('[fkey.shapedata].subj.geometry')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[fkey.shapedata].subj.geometry',
+    fnspath: null,
+    fnsstr: 'fkey.shapedata',
+    fnskey: 'fkey',
+    fnsprop: 'shapedata',
+    nsstr: 'subj.geometry',
+    nskey: 'subj',
+    nsprop: 'geometry'
+  })
+})
 
 test("should parse 'pkg.start'", () => {
-  const nsobj = nsstr('pkg.start');
+  const nsobj = nsstr('pkg.start')
 
-  assert.strictEqual( nsobj.fnspath, undefined );
-  assert.strictEqual( nsobj.fullstr, 'pkg.start' );
-  assert.strictEqual( nsobj.nsstr, 'pkg.start' );
-  assert.strictEqual( nsobj.nskey, 'pkg' );
-  assert.strictEqual( nsobj.nsprop, 'start' );
-  assert.strictEqual( nsobj.fnsstr, undefined );
-  assert.strictEqual( nsobj.fnskey, undefined );
-  assert.strictEqual( nsobj.fnsprop, undefined );
-});
+  assert.deepStrictEqual(nsobj, {
+    fullstr: 'pkg.start',
+    fnspath: null,
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: 'pkg.start',
+    nskey: 'pkg',
+    nsprop: 'start'
+  })
+})
 
 test("should parse 'subj'", () => {
-  const nsobj = nsstr('subj');
+  const nsobj = nsstr('subj')
 
-  assert.strictEqual( nsobj.fnspath, undefined );
-  assert.strictEqual( nsobj.fullstr, 'subj' );
-  assert.strictEqual( nsobj.nsstr, 'subj' );
-  assert.strictEqual( nsobj.nskey, 'subj' );
-  assert.strictEqual( nsobj.nsprop, undefined );
-  assert.strictEqual( nsobj.fnsstr, undefined );
-  assert.strictEqual( nsobj.fnskey, undefined );
-  assert.strictEqual( nsobj.fnsprop, undefined );  
-});
-
+  assert.deepStrictEqual(nsobj, {
+    fullstr: 'subj',
+    fnspath: null,
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: 'subj',
+    nskey: 'subj',
+    nsprop: null
+  })
+})
 
 test("should parse '[fkey.shapedata].subj'", () => {
-  const nsobj = nsstr('[fkey.shapedata].subj');
-  
-  assert.strictEqual( nsobj.fnspath, undefined );
-  assert.strictEqual( nsobj.fullstr, '[fkey.shapedata].subj' );
-  assert.strictEqual( nsobj.nsstr, 'subj' );
-  assert.strictEqual( nsobj.nskey, 'subj' );
-  assert.strictEqual( nsobj.nsprop, undefined );
-  assert.strictEqual( nsobj.fnsstr, 'fkey.shapedata' );
-  assert.strictEqual( nsobj.fnskey, 'fkey' );
-  assert.strictEqual( nsobj.fnsprop, 'shapedata' );
-});
+  const nsobj = nsstr('[fkey.shapedata].subj')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[fkey.shapedata].subj',
+    fnspath: null,
+    fnsstr: 'fkey.shapedata',
+    fnskey: 'fkey',
+    fnsprop: 'shapedata',
+    nsstr: 'subj',
+    nskey: 'subj',
+    nsprop: null
+  })
+})
