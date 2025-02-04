@@ -1,8 +1,8 @@
-nsstr
-=====
-**(c)[Bumblehead][0]**
+# nsstr
 
-Parse and stringify an `nsstr`. This library is gani-specific and probably not useful elsewhere.
+[![npm][9]][7] [![mit][2]][1]  [![install size][6]][5]
+
+**Parse and stringify an `nsstr`.** This library is gani-specific and probably not useful elsewhere.
 
 ``` javascript
 nsstr.parse('[/dataerrors].subj.childremoved')
@@ -37,7 +37,14 @@ nsstr.parse('pkg.start');
 ```
 
 
-[0]: http://bumblehead.com                            "bumblehead"
+[9]: https://img.shields.io/npm/v/nsstr
+[7]: https://www.npmjs.com/package/nsstr
+[1]: https://mit-license.org/ "MIT License"
+[2]: https://img.shields.io/badge/license-MIT-blue.svg "MIT"
+[5]: https://packagephobia.now.sh/result?p=nsstr
+[6]: https://packagephobia.now.sh/badge?p=nsstr
+
+[0]: https://bumblehead.com                            "bumblehead"
 
 ![scrounge](https://github.com/iambumblehead/scroungejs/raw/main/img/hand.png)
 

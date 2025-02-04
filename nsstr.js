@@ -3,43 +3,57 @@
 // Author(s): bumblehead <chris@bumblehead.com>
 
 const ispathstrre = /^\.?\.?\//
-const parsekeyre = /([^.]*)\.(.*)/
-const parsefnslnsre = /^(\[.*\]\.)?(.*)$/
+const parsefnslnsre = /^(\[.*\])?\.?(.*)$/
 
 export default fullstr => {
-  let parsedfnsstr = (fullstr && fullstr.match(parsefnslnsre) || []),
-      fnsstr = parsedfnsstr[1],
-      nsstr = parsedfnsstr[2],
-      parsednsstr = (nsstr && nsstr.match(parsekeyre) || []),
-      nskey = parsednsstr[1] || nsstr,
-      nsprop = parsednsstr[2],
-      fnskey,
-      fnsprop,
-      fnspath;
+  let idxdot,
+      parsedfnsstr = fullstr && fullstr.match(parsefnslnsre) || [],
+      fnsblock = parsedfnsstr[1],
+      nsblock = parsedfnsstr[2],
+      fnspath = null,
+      fnsstr = null,
+      fnskey = null,
+      fnsprop = null,
+      nsstr = null,
+      nskey = null,
+      nsprop = null
 
-  if (fnsstr) {
-    // [/dataerrors]. => /dataerrors
-    // [fkey.shapedata]. => fkey.shapedata
-    fnsstr = fnsstr.substr(1, fnsstr.length - 3);
-
-    if (ispathstrre.test(fnsstr)) {
-      fnspath = fnsstr
+  if (nsblock) {
+    nsstr = nsblock
+    idxdot = nsstr.indexOf('.')
+    if (idxdot > -1) {
+      nskey = nsstr.substr(0, idxdot)
+      nsprop = nsstr.slice(idxdot + 1)
     } else {
-      parsednsstr = (fnsstr && fnsstr.match(parsekeyre) || []),
-      fnskey = parsednsstr[1]
-      fnsprop = parsednsstr[2]
+      nskey = nsstr
+    }
+  }
+
+  if (fnsblock) {
+    fnsblock = fnsblock.slice(1, -1)
+    if (ispathstrre.test(fnsblock)) {
+      // has _either_ {fnspath} _or_ {fnsstr, fnskey, fnsprop}
+      fnspath = fnsblock
+    } else {
+      fnsstr = fnsblock
+      idxdot = fnsstr && fnsstr.indexOf('.')
+      if (idxdot > -1) {
+        fnskey = fnsstr.substr(0, idxdot)
+        fnsprop = fnsstr.slice(idxdot + 1)
+      } else {
+        fnskey = fnsstr
+      }
     }
   }
 
   return {
     fullstr, // original str, [fkey.articlekey].subj.type
-
     nsstr,   // local namespace, subj.type
     nskey,   // local key, base|subj|fkey|pkg|init
     nsprop,  // local prop, type
 
+    fnspath, // foreign path, '/dataerrors' (local path if undefind)
     fnsstr,  // foreign namespace, 'fkey.articlekey' || '/dataerrors'
-    fnspath, // foreign path, '/dataerrors'
     fnskey,  // foreign key, fkey
     fnsprop  // foreign prop, articlekey
   }
