@@ -3,7 +3,7 @@
 // Author(s): bumblehead <chris@bumblehead.com>
 
 const ispathstrre = /^\.?\.?\//
-const parsefnslnsre = /^(\[.*\])?\.?(.*)$/
+const parsefnslnsre = /^(\[[^\]]*\])?\.?(.*)$/
 
 export default fullstr => {
   let idxdot,
@@ -19,13 +19,20 @@ export default fullstr => {
       nsprop = null
 
   if (nsblock) {
-    nsstr = nsblock
-    idxdot = nsstr.indexOf('.')
-    if (idxdot > -1) {
-      nskey = nsstr.substr(0, idxdot)
-      nsprop = nsstr.slice(idxdot + 1)
+    if (nsblock.startsWith('[')) {
+      nsstr = nsblock
+      nskey = nsblock
     } else {
-      nskey = nsstr
+      nsstr = nsblock
+      if ((idxdot = nsstr.indexOf('[[')) > -1) {
+        nskey = nsstr.substr(0, idxdot)
+        nsprop = nsstr.slice(idxdot + 1, -1)
+      } else if ((idxdot = nsstr.indexOf('.')) > -1) {
+        nskey = nsstr.substr(0, idxdot)
+        nsprop = nsstr.slice(idxdot + 1)
+      } else {
+        nskey = nsstr
+      }
     }
   }
 

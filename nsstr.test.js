@@ -95,3 +95,33 @@ test("should parse '[fkey.shapedata].subj'", () => {
     nsprop: null
   })
 })
+
+test("should parse '[fkey.shapedata][[fkey.dynamic].prop]'", () => {
+  const nsobj = nsstr('[fkey.shapedata][[fkey.dynamic].prop]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[fkey.shapedata][[fkey.dynamic].prop]',
+    fnspath: null,
+    fnsstr: 'fkey.shapedata',
+    fnskey: 'fkey',
+    fnsprop: 'shapedata',
+    nsstr: '[[fkey.dynamic].prop]',
+    nskey: '[[fkey.dynamic].prop]',
+    nsprop: null
+  })
+})
+
+test("should parse '[fkey.shapedata].subj[[fkey.dynamic].prop]'", () => {
+  const nsobj = nsstr('[fkey.shapedata].subj[[fkey.dynamic].prop]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[fkey.shapedata].subj[[fkey.dynamic].prop]',
+    fnspath: null,
+    fnsstr: 'fkey.shapedata',
+    fnskey: 'fkey',
+    fnsprop: 'shapedata',
+    nsstr: 'subj[[fkey.dynamic].prop]',
+    nskey: 'subj',
+    nsprop: '[fkey.dynamic].prop'
+  })
+})
