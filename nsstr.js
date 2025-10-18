@@ -20,15 +20,16 @@ export default fullstr => {
 
   if (nsblock) {
     nsstr = nsblock
-    nskey = nsblock    
-    if (!nsblock.startsWith('[')) {
-      if ((idxdot = nsstr.indexOf('[[')) > -1) {
-        nskey = nsstr.substr(0, idxdot)
-        nsprop = nsstr.slice(idxdot + 1, -1)
-      } else if ((idxdot = nsstr.indexOf('.')) > -1) {
-        nskey = nsstr.substr(0, idxdot)
-        nsprop = nsstr.slice(idxdot + 1)
-      }
+    nskey = nsblock
+    if (nsblock.startsWith('[')) {
+      nskey = nsblock.slice(1, -1)
+      nsstr = nskey
+    } else if ((idxdot = nsstr.indexOf('[[')) > -1) {
+      nskey = nsstr.substr(0, idxdot)
+      nsprop = nsstr.slice(idxdot + 1, -1)
+    } else if ((idxdot = nsstr.indexOf('.')) > -1) {
+      nskey = nsstr.substr(0, idxdot)
+      nsprop = nsstr.slice(idxdot + 1)
     }
   }
 

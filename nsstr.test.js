@@ -105,8 +105,8 @@ test("should parse '[fkey.shapedata][[fkey.dynamic].prop]'", () => {
     fnsstr: 'fkey.shapedata',
     fnskey: 'fkey',
     fnsprop: 'shapedata',
-    nsstr: '[[fkey.dynamic].prop]',
-    nskey: '[[fkey.dynamic].prop]',
+    nsstr: '[fkey.dynamic].prop',
+    nskey: '[fkey.dynamic].prop',
     nsprop: null
   })
 })
