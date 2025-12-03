@@ -95,3 +95,93 @@ test("should parse '[fkey.shapedata].subj'", () => {
     nsprop: null
   })
 })
+
+test("should parse '[fkey.shapedata][[fkey.dynamic].prop]'", () => {
+  const nsobj = nsstr('[fkey.shapedata][[fkey.dynamic].prop]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[fkey.shapedata][[fkey.dynamic].prop]',
+    fnspath: null,
+    fnsstr: 'fkey.shapedata',
+    fnskey: 'fkey',
+    fnsprop: 'shapedata',
+    nsstr: '[fkey.dynamic].prop',
+    nskey: '[fkey.dynamic].prop',
+    nsprop: null
+  })
+})
+
+test("should parse '[fkey.shapedata].subj[[fkey.dynamic].prop]'", () => {
+  const nsobj = nsstr('[fkey.shapedata].subj[[fkey.dynamic].prop]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[fkey.shapedata].subj[[fkey.dynamic].prop]',
+    fnspath: null,
+    fnsstr: 'fkey.shapedata',
+    fnskey: 'fkey',
+    fnsprop: 'shapedata',
+    nsstr: 'subj[[fkey.dynamic].prop]',
+    nskey: 'subj',
+    nsprop: '[fkey.dynamic].prop'
+  })
+})
+
+test("should parse '[/path].subj[fkey.ordertype]'", () => {
+  const nsobj = nsstr('[/path].subj[fkey.ordertype]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[/path].subj[fkey.ordertype]',
+    fnspath: '/path',
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: 'subj[fkey.ordertype]',
+    nskey: 'subj',
+    nsprop: 'fkey.ordertype'
+  })
+})
+
+test("should parse '[/path][fkey.ordertype]'", () => {
+  const nsobj = nsstr('[/path][fkey.ordertype]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[/path][fkey.ordertype]',
+    fnspath: '/path',
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: 'fkey.ordertype',
+    nskey: 'fkey.ordertype',
+    nsprop: null
+  })
+})
+
+test("should parse '[/path][ordertype]'", () => {
+  const nsobj = nsstr('[/path][ordertype]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[/path][ordertype]',
+    fnspath: '/path',
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: 'ordertype',
+    nskey: 'ordertype',
+    nsprop: null
+  })
+})
+
+test("should parse '[/path][fkey.nstype][fkey.prop]'", () => {
+  const nsobj = nsstr('[/path][fkey.nstype][fkey.prop]')
+
+  assert.deepStrictEqual(nsobj, {
+    fullstr: '[/path][fkey.nstype][fkey.prop]',
+    fnspath: '/path',
+    fnsstr: null,
+    fnskey: null,
+    fnsprop: null,
+    nsstr: '[fkey.nstype][fkey.prop]',
+    nskey: 'fkey.nstype',
+    nsprop: 'fkey.prop',
+  })
+})

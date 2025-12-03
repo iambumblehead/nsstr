@@ -3,10 +3,11 @@
 // Author(s): bumblehead <chris@bumblehead.com>
 
 const ispathstrre = /^\.?\.?\//
-const parsefnslnsre = /^(\[.*\])?\.?(.*)$/
+const parsefnslnsre = /^(\[[^\]]*\])?\.?(.*)$/
 
 export default fullstr => {
   let idxdot,
+      idxbrace,
       parsedfnsstr = fullstr && fullstr.match(parsefnslnsre) || [],
       fnsblock = parsedfnsstr[1],
       nsblock = parsedfnsstr[2],
@@ -20,12 +21,29 @@ export default fullstr => {
 
   if (nsblock) {
     nsstr = nsblock
-    idxdot = nsstr.indexOf('.')
-    if (idxdot > -1) {
+    nskey = nsblock
+    if (nsblock.startsWith('[')) {
+      nskey = nsblock.slice(1, -1)
+      if ((idxbrace = nskey.indexOf('][')) > -1) {
+        nsprop = nskey.slice(idxbrace + 2)
+        nskey = nskey.slice(0, idxbrace)
+      } else {
+        nsstr = nskey
+      }
+    } else if ((idxdot = nsstr.indexOf('[[')) > -1) {
       nskey = nsstr.substr(0, idxdot)
-      nsprop = nsstr.slice(idxdot + 1)
+      nsprop = nsstr.slice(idxdot + 1, -1)
     } else {
-      nskey = nsstr
+      idxdot = nsstr.indexOf('.')
+      idxbrace = nsstr.indexOf('[')
+
+      if (idxdot > -1 && (idxbrace === -1 || idxbrace > idxdot)) {
+        nskey = nsstr.substr(0, idxdot)
+        nsprop = nsstr.slice(idxdot + 1)
+      } else if (idxbrace > -1 && (idxdot === -1 || idxbrace < idxdot)) {
+        nskey = nsstr.substr(0, idxbrace)
+        nsprop = nsstr.slice(idxbrace + 1, -1)
+      }
     }
   }
 
